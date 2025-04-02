@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Quiz App Testimonials</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #6e8efb;
+            --secondary-color: #a777e3;
+            --accent-color: #ff6b6b;
+            --dark-color: #333;
+            --light-color: #f5f7fb;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .promotion-banner {
+            max-width: 800px;
+            width: 100%;
+            background: linear-gradient(135deg, #232526, #414345);
+            color: white;
+            border-radius: 12px 12px 0 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.1);
+            margin-bottom: -1px;
+        }
+        
+        @media (min-width: 768px) {
+            .promotion-banner {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                padding: 15px 30px;
+            }
+        }
+        
+        .countdown-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+        }
+        
+        .countdown-label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            opacity: 0.8;
+        }
+        
+        .countdown-timer {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .countdown-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 6px;
+        }
+        
+        .time-value {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .time-label {
+            font-size: 10px;
+            opacity: 0.7;
+        }
+        
+        .offer-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 15px;
+        }
+        
+        .offer-text {
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .price-container {
+            margin-top: 5px;
+        }
+        
+        .original-price {
+            text-decoration: line-through;
+            opacity: 0.6;
+            margin-right: 5px;
+        }
+        
+        .current-price {
+            font-weight: bold;
+            color: var(--accent-color);
+            font-size: 18px;
+        }
+        
+        .upgrade-button {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        .upgrade-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(110, 142, 251, 0.4);
+        }
+        
+        .testimonial-container {
+            max-width: 800px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .testimonial-header {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            padding: 24px;
+            text-align: center;
+        }
+        
+        .testimonial-header h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .testimonial-header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .testimonial-slider {
+            position: relative;
+            height: 380px;
+            overflow: hidden;
+        }
+        
+        .testimonial {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.5s ease;
+        }
+        
+        .testimonial.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .testimonial.previous {
+            transform: translateX(-100%);
+        }
+        
+        .student-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #f5f7fb;
+            margin-bottom: 20px;
+        }
+        
+        .quote {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+        
+        .student-info h3 {
+            font-size: 20px;
+            color: #6e8efb;
+            margin-bottom: 5px;
+        }
+        
+        .student-info p {
+            color: #888;
+            font-size: 16px;
+        }
+        
+        .grade-improvement {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .grade-badge {
+            background-color: #eaf2ff;
+            color: #6e8efb;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .grade-badge i {
+            color: #a777e3;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            gap: 10px;
+        }
+        
+        .control-btn {
+            background-color: #eaf2ff;
+            color: #6e8efb;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .control-btn:hover {
+            background-color: #6e8efb;
+            color: white;
+        }
+        
+        .indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator.active {
+            background-color: #6e8efb;
+            width: 20px;
+            border-radius: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .testimonial {
+                padding: 30px 20px;
+            }
+            
+            .quote {
+                font-size: 16px;
+            }
+            
+            .student-avatar {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="promotion-banner">
+        <div class="countdown-container">
+            <div class="countdown-label">Limited Time Offer Ends In:</div>
+            <div class="countdown-timer" id="countdown">
+                <div class="countdown-unit">
+                    <span class="time-value" id="hours">16</span>
+                    <span class="time-label">hours</span>
+                </div>
+                <div class="countdown-unit">
+                    <span class="time-value" id="minutes">38</span>
+                    <span class="time-label">minutes</span>
+                </div>
+                <div class="countdown-unit">
+                    <span class="time-value" id="seconds">39</span>
+                    <span class="time-label">seconds</span>
+                </div>
+            </div>
+        </div>
+        <div class="offer-container">
+            <div class="offer-text">
+                <p>Upgrade now before prices increase!</p>
+                <div class="price-container">
+                    <span class="original-price">$149</span>
+                    <span class="current-price">$99.99</span>
+                </div>
+            </div>
+            <a href="https://t.me/+lgEajMWG_JRkYmI0" class="upgrade-button">CLICK HERE TO UPGRADE TO PRO</a>
+        </div>
+    </div>
+    
+    <div class="testimonial-container">
+        <div class="testimonial-header">
+            <h2>Student Success Stories</h2>
+            <p>See how our Math Quiz App is helping students excel</p>
+        </div>
+        
+        <div class="testimonial-slider" id="testimonialSlider">
+            <!-- Testimonials will be inserted here via JavaScript -->
+        </div>
+        
+        <div class="indicators" id="indicators">
+            <!-- Indicators will be inserted here via JavaScript -->
+        </div>
+        
+        <div class="controls">
+            <button class="control-btn" id="prevBtn">←</button>
+            <button class="control-btn" id="nextBtn">→</button>
+        </div>
+    </div>
+
+    <script>
+        // Countdown timer functionality
+        function initializeCountdown() {
+            // Set initial values to 16:38:39 every time
+            const hoursElement = document.getElementById('hours');
+            const minutesElement = document.getElementById('minutes');
+            const secondsElement = document.getElementById('seconds');
+            
+            // Initial values - always reset to these values on page load
+            hoursElement.textContent = '16';
+            minutesElement.textContent = '38';
+            secondsElement.textContent = '39';
+            
+            // Store remaining time in variables
+            let hours = 16;
+            let minutes = 38;
+            let seconds = 39;
+            
+            // Clear any existing interval
+            if (window.countdownInterval) {
+                clearInterval(window.countdownInterval);
+            }
+            
+            function updateCountdown() {
+                // Decrease seconds
+                seconds--;
+                
+                // Handle minute rollover
+                if (seconds < 0) {
+                    seconds = 59;
+                    minutes--;
+                    
+                    // Handle hour rollover
+                    if (minutes < 0) {
+                        minutes = 59;
+                        hours--;
+                        
+                        // If countdown is complete, reset to initial values
+                        if (hours < 0) {
+                            hours = 16;
+                            minutes = 38;
+                            seconds = 39;
+                        }
+                    }
+                }
+                
+                // Update DOM
+                hoursElement.textContent = hours.toString().padStart(2, '0');
+                minutesElement.textContent = minutes.toString().padStart(2, '0');
+                secondsElement.textContent = seconds.toString().padStart(2, '0');
+            }
+            
+            // Start countdown
+            window.countdownInterval = setInterval(updateCountdown, 1000);
+        }
+        
+        // Initialize countdown on page load
+        initializeCountdown();
+        
+        // Testimonial data
+        const testimonials = [
+            {
+                name: "Alex Johnson",
+                grade: "10th Grade",
+                image: "https://www.fastweb.com/uploads/article_photo/photo/2036641/10-ways-to-be-a-better-student.jpeg",
+                quote: "This Math Quiz App completely transformed my approach to algebra. I went from dreading math homework to actually looking forward to daily practice. The instant feedback helped me understand my mistakes right away.",
+                improvement: "B- to A"
+            },
+            {
+                name: "Samantha Lee",
+                grade: "8th Grade",
+                image: "https://www.campuspride.org/wp-content/uploads/iStock_000053761364_Medium.jpg.736x0_q85.jpg",
+                quote: "The practice quizzes are perfectly timed and challenging. I love how the app adapts to my skill level. After three months of consistent use, I aced my final exams and gained so much confidence in my math abilities!",
+                improvement: "C+ to A-"
+            },
+            {
+                name: "Marcus Williams",
+                grade: "11th Grade",
+                image: "https://www.teachhub.com/wp-content/uploads/2021/09/Aug-30-Challenges-Faced-by-a-First-Generation-College-Student_web-768x519.jpg",
+                quote: "I struggled with calculus concepts until I found this app. The step-by-step explanations clarified everything my textbook couldn't. Now math is actually my strongest subject!",
+                improvement: "D to B+"
+            },
+            {
+                name: "Olivia Rodriguez",
+                grade: "9th Grade",
+                image: "https://www.rathinamcollege.edu.in/wp-content/uploads/2021/02/first-year-634x317.jpg",
+                quote: "As someone with math anxiety, this app was a game-changer. The friendly interface and encouraging feedback helped me overcome my fear. I can now approach math problems with confidence instead of panic.",
+                improvement: "C- to B+"
+            }
+        ];
+
+        // DOM elements
+        const slider = document.getElementById('testimonialSlider');
+        const indicators = document.getElementById('indicators');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        let currentIndex = 0;
+        
+        // Initialize testimonials
+        function initTestimonials() {
+            // Create testimonial elements
+            testimonials.forEach((testimonial, index) => {
+                const testimonialEl = document.createElement('div');
+                testimonialEl.className = `testimonial ${index === 0 ? 'active' : ''}`;
+                
+                testimonialEl.innerHTML = `
+                    <img src="${testimonial.image}" alt="${testimonial.name}" class="student-avatar">
+                    <p class="quote">"${testimonial.quote}"</p>
+                    <div class="student-info">
+                        <h3>${testimonial.name}</h3>
+                        <p>${testimonial.grade}</p>
+                    </div>
+                    <div class="grade-improvement">
+                        <span class="grade-badge">
+                            <i>↗</i> Improved from ${testimonial.improvement}
+                        </span>
+                    </div>
+                `;
+                
+                slider.appendChild(testimonialEl);
+                
+                // Create indicator
+                const indicator = document.createElement('div');
+                indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
+                indicator.addEventListener('click', () => goToSlide(index));
+                indicators.appendChild(indicator);
+            });
+        }
+        
+        // Go to specific slide
+        function goToSlide(index) {
+            const testimonialElements = document.querySelectorAll('.testimonial');
+            const indicatorElements = document.querySelectorAll('.indicator');
+            
+            // Remove all classes
+            testimonialElements.forEach(el => {
+                el.className = 'testimonial';
+            });
+            
+            indicatorElements.forEach(el => {
+                el.className = 'indicator';
+            });
+            
+            // Add appropriate classes
+            testimonialElements[currentIndex].className = 'testimonial previous';
+            testimonialElements[index].className = 'testimonial active';
+            indicatorElements[index].className = 'indicator active';
+            
+            currentIndex = index;
+        }
+        
+        // Next slide
+        function nextSlide() {
+            const newIndex = (currentIndex + 1) % testimonials.length;
+            goToSlide(newIndex);
+        }
+        
+        // Previous slide
+        function prevSlide() {
+            const newIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+            goToSlide(newIndex);
+        }
+        
+        // Event listeners
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+        
+        // Auto-advance slides every 10 seconds
+        let slideInterval = setInterval(nextSlide, 10000);
+        
+        // Pause auto-advance when user interacts
+        document.querySelector('.testimonial-container').addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+        
+        // Resume auto-advance when user leaves
+        document.querySelector('.testimonial-container').addEventListener('mouseleave', () => {
+            slideInterval = setInterval(nextSlide, 5000);
+        });
+        
+        // Initialize the testimonials
+        initTestimonials();
+        
+        // Reset countdown if user refreshes the page
+        window.addEventListener('beforeunload', function() {
+            // This ensures a fresh countdown on next page load
+            localStorage.removeItem('countdownTime');
+        });
+    </script>
+</body>
+</html>
