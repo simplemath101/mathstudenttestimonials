@@ -91,14 +91,31 @@
         
         .offer-container {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 20px;
             padding: 15px;
+            width: 100%;
+        }
+        
+        @media (min-width: 768px) {
+            .offer-container {
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 20px;
+            }
         }
         
         .offer-text {
             font-size: 14px;
             text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        @media (min-width: 768px) {
+            .offer-text {
+                margin-bottom: 0;
+                text-align: left;
+            }
         }
         
         .price-container {
@@ -128,6 +145,13 @@
             transition: all 0.3s ease;
             text-align: center;
             white-space: nowrap;
+            width: 100%;
+        }
+        
+        @media (min-width: 768px) {
+            .upgrade-button {
+                width: auto;
+            }
         }
         
         .upgrade-button:hover {
@@ -163,8 +187,14 @@
         
         .testimonial-slider {
             position: relative;
-            height: 380px;
+            height: 420px;
             overflow: hidden;
+        }
+        
+        @media (max-width: 768px) {
+            .testimonial-slider {
+                height: 450px;
+            }
         }
         
         .testimonial {
@@ -192,12 +222,19 @@
         }
         
         .student-avatar {
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             object-fit: cover;
             border: 5px solid #f5f7fb;
             margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .student-avatar {
+                width: 120px;
+                height: 120px;
+            }
         }
         
         .quote {
@@ -289,16 +326,11 @@
         
         @media (max-width: 768px) {
             .testimonial {
-                padding: 30px 20px;
+                padding: 20px 15px;
             }
             
             .quote {
                 font-size: 16px;
-            }
-            
-            .student-avatar {
-                width: 100px;
-                height: 100px;
             }
         }
     </style>
